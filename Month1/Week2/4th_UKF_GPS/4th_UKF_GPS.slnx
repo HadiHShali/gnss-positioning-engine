@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="4th_UKF_GPS.vcxproj" Id="4f0847bf-00c6-49b6-9d11-beb335b1064d" />
+</Solution>
