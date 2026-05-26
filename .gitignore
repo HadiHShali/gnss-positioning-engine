@@ -430,3 +430,6 @@ FodyWeavers.xsd
 x64/
 .vs/
 *.user
+"build/" 
+"CMakeLists.txt" 
+"CMakeFiles/" 

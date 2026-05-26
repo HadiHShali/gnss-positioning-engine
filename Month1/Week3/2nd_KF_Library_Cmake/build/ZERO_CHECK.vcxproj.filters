@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="18.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\GeodesyLab\OneDrive - The University of Memphis\Desktop\6Month_GNSS_KF_Cpp\GNSS_SensorFusion_KF_Cpp\Month1\Week3\2nd_KF_Library_Cmake\build\CMakeFiles\560517f0b700b7f94105bed803b1754d\generate.stamp.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{E68B13AA-B016-3C94-A5B4-EA358B8EA992}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
