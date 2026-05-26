@@ -433,3 +433,7 @@ x64/
 "build/" 
 "CMakeLists.txt" 
 "CMakeFiles/" 
+build/
+CMakeCache.txt
+CMakeFiles/
+*.cmake
