@@ -1,4 +1,4 @@
-# GNSS Sensor Fusion & Kalman Filter Engine — C++
+# GNSS Sensor Fusion & Kalman Filter & Orbit Determination Engine — C++
 
 > **A from-scratch implementation of GNSS positioning algorithms in modern C++**, built as part of a structured 6-month curriculum targeting navigation engineering roles in spacecraft and ground GNSS systems.
 
