@@ -48,7 +48,7 @@ editors or pause sync. Quote full paths (they contain spaces).
 RINEX 2: `/archive/gnss/rinex/obs/2024/007/bill0070.24d.Z` (take `.d.Z`; `.o.Z` expires).
 ```bash
 gzip -d data/bill0070.24d.Z
-/c/Dev/tools/RNXCMP_4.2.0_Windows_mingw_64bit/bin/CRX2RNX.exe data/bill0070.24d
+RNXCMP_4.2.0_Windows_mingw_64bit/bin/CRX2RNX.exe data/bill0070.24d
 ```
 Line 1 ending in `CRINEX VERS / TYPE` = still Hatanaka. First byte `0x1F` = still .gz/.Z.
 The parsers print both messages.
