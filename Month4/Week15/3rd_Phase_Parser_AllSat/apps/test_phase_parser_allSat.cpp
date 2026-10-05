@@ -25,7 +25,7 @@ int main()
 	// Short gap = still compare across it (brief dropout, could be a real slip).
 	// Long gap  = treat as a fresh arc (satellite re-acquired); don't compare,
 	// since the jump is expected and NOT indicative of a slip within one arc.
-	const int MAX_SHORT_GAP = 3;   // epochs (4 * 15s = 60s at this file's rate)
+	const int MAX_SHORT_GAP = 4;   // epochs (4 * 15s = 60s at this file's rate)
 
 	int epoch_idx = 0;
 	for (const auto& ep : epochs)
