@@ -6,3 +6,4 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
  
 add_executable(rinex_nav_parser apps/rinex_nav_parser.cpp)
+add_executable(rinex_nav_parser_crctd apps/rinex_nav_parser_crctd.cpp)

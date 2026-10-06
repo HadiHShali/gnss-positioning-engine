@@ -5,3 +5,4 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
  
 add_executable(all_visible_sats_Skyplot apps/all_visible_sats_Skyplot.cpp)
+add_executable(all_visible_sats_Skyplot_crctd apps/all_visible_sats_Skyplot_crctd.cpp)

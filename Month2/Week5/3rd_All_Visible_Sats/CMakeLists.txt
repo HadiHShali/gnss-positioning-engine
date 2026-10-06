@@ -5,3 +5,4 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
  
 add_executable(all_visible_sats apps/all_visible_sats.cpp)
+add_executable(all_visible_sats_crctd apps/all_visible_sats_crctd.cpp)
