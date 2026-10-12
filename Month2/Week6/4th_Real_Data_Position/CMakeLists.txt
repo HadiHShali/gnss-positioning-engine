@@ -13,3 +13,12 @@ add_executable(real_data_position
     src/utils.cpp
     src/satellites.cpp
     src/rinex_obs.cpp)
+
+# CORRECTED (2026-10-12): transmit-time version of the same app.
+# Same library sources; only the app file differs.
+add_executable(real_data_position_crctd
+    apps/real_data_position_crctd.cpp
+    src/gps_ls_solver.cpp
+    src/utils.cpp
+    src/satellites.cpp
+    src/rinex_obs.cpp)
