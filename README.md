@@ -49,19 +49,6 @@
 
 **Month 2 SPP after the transmit-time fix** (BILL00USA, Jan 7 2024, single-frequency L1 C/A, broadcast ephemeris, Klobuchar + Saastamoinen, scored against BILL's IGS XYZ): 5,760/5,760 epochs fixed, **mean 3D error 3.0 m, median 2.4 m**. The remaining error follows local time of day (residual ionosphere after Klobuchar).
 
-Real BILL00USA IGS reference station, Jan 7 2024, 24-hour trajectory:
-
-| Stage | Mean 3D Error |
-|---|---|
-| Raw single-frequency SPP | 39.0 m |
-| + Kalman Filter | 28.0 m |
-| + RTS Smoother | 15.6 m |
-| + Dual-Frequency (ionosphere-free) | 13.84 m |
-| **+ SP3/CLK Precise Products** | **13.14 m** |
-
-**66% error reduction** achieved by systematically combining statistical filtering
-(random-noise removal) with physics-based correction (systematic-bias removal) —
-each technique's contribution validated against the specific error type it targets.
 
 ![Trajectory Analysis](Month2/Week9/3rd_Trajectory_Analysis/data/trajectory_analysis_crctd.png)
 ![Engineering Diagnostics](Month2/Week9/3rd_Trajectory_Analysis/data/diagnostics_crctd.png)
