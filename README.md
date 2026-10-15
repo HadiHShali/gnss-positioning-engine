@@ -14,9 +14,9 @@
 
 **Core SPP pipeline (Months 1-2):**
 - Parses RINEX 3 navigation and observation files
-- Computes GPS satellite positions from broadcast ephemerides (IS-GPS-200)
-- Applies full satellite clock corrections: polynomial (bias/drift/drift-rate), relativistic (Kepler-based), TGD
-- Corrects for Earth rotation during signal travel (Sagnac effect)
+- Computes GPS satellite positions from broadcast ephemerides (IS-GPS-200) at the signal **transmit time** (t_tx = t_obs − P/c − dt_sat)
+- Applies full satellite clock corrections at transmit time, referenced to toc: polynomial (bias/drift/drift-rate), relativistic (Kepler-based), TGD
+- Corrects for Earth rotation during signal travel (Sagnac effect) using the true signal flight time
 - Applies elevation masking (configurable, default 10 deg)
 - Models ionospheric delay via Klobuchar 8-parameter model
 - Models tropospheric delay via Saastamoinen with standard atmosphere
@@ -47,6 +47,8 @@
 
 ## Sample Results
 
+**Month 2 SPP after the transmit-time fix** (BILL00USA, Jan 7 2024, single-frequency L1 C/A, broadcast ephemeris, Klobuchar + Saastamoinen, scored against BILL's IGS XYZ): 5,760/5,760 epochs fixed, **mean 3D error 3.0 m, median 2.4 m**. The remaining error follows local time of day (residual ionosphere after Klobuchar).
+
 Real BILL00USA IGS reference station, Jan 7 2024, 24-hour trajectory:
 
 | Stage | Mean 3D Error |
@@ -61,8 +63,8 @@ Real BILL00USA IGS reference station, Jan 7 2024, 24-hour trajectory:
 (random-noise removal) with physics-based correction (systematic-bias removal) —
 each technique's contribution validated against the specific error type it targets.
 
-![Trajectory Analysis](Month2/Week9/3rd_Trajectory_Analysis/data/trajectory_analysis.png)
-![Engineering Diagnostics](Month2/Week9/3rd_Trajectory_Analysis/data/diagnostics.png)
+![Trajectory Analysis](Month2/Week9/3rd_Trajectory_Analysis/data/trajectory_analysis_crctd.png)
+![Engineering Diagnostics](Month2/Week9/3rd_Trajectory_Analysis/data/diagnostics_crctd.png)
 ![Month 3 Milestone](Month3/Week14/month3_FINAL_milestone.png)
 
 ---
@@ -71,7 +73,7 @@ each technique's contribution validated against the specific error type it targe
 
 ```
 Month1/  Foundations — Kalman family, coordinates, RINEX basics
-Month2/  GPS Positioning (COMPLETE)
+Month2/  GPS Positioning (COMPLETE, transmit-time corrected)
   Week5/  Satellite ephemeris computation
   Week6/  Least-squares position solver
   Week7/  DOP analysis + sky plot visualization
@@ -174,6 +176,10 @@ numerically against real data before being trusted. This approach caught several
 real bugs during development — including a unit-mismatch error in the geometry-free
 combination and a gap-handling logic error in cycle-slip detection — both found by
 computing expected values by hand and comparing against actual program output.
+It also caught a timing error: satellite position, clock and Earth-rotation terms
+were evaluated at signal reception instead of transmit time (~23 m of position error).
+Corrected copies (`_crctd` suffix) sit next to the originals so the diff shows exactly
+what changed. Month 2 is fixed, and later months are in progress.
 
 ---
 
@@ -210,7 +216,7 @@ Implementations follow official specifications and authoritative sources:
 
 ## Updated Monthly
 
-This README is updated at the end of each month with new accomplishments, screenshots, and milestones. **Last update: Month 4, Week 16 (in progress).**
+This README is updated at the end of each month with new accomplishments, screenshots, and milestones. **Last update: Month 2 transmit-time correction pass (October 2026).**
 
 ---
 
