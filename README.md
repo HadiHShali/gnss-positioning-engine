@@ -52,7 +52,6 @@
 
 ![Trajectory Analysis](Month2/Week9/3rd_Trajectory_Analysis/data/trajectory_analysis_crctd.png)
 ![Engineering Diagnostics](Month2/Week9/3rd_Trajectory_Analysis/data/diagnostics_crctd.png)
-![Month 3 Milestone](Month3/Week14/month3_FINAL_milestone.png)
 
 ---
 
