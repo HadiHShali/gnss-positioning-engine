@@ -9,13 +9,14 @@ import pandas as pd
 import matplotlib.pyplot as plt
  
 # ── LOAD DATA ──
-df = pd.read_csv('../data/trajectory.csv')
+df = pd.read_csv('../data/trajectory_crctd.csv')
 df = df[df['converged'] == 1].reset_index(drop=True)
  
 # Truth for 3D error computation
-TRUE_LAT = 33.578381
-TRUE_LON = -117.064265
-TRUE_H   = 472.0
+# BILL00USA truth, converted from IGS XYZ (-2420420.501, -4737131.551, 3507827.665), WGS84
+TRUE_LAT = 33.578243000    # deg
+TRUE_LON = -117.064599000  # deg
+TRUE_H   = 470.061         # m, ellipsoidal
 R_EARTH  = 6378137.0
  
 lat_rad = np.radians(TRUE_LAT)
@@ -96,7 +97,7 @@ ax.grid(True, alpha=0.3)
 fig.suptitle('BILL00USA — Engineering Diagnostics',
              fontsize=14, fontweight='bold', color='#1B3A6B', y=1.00)
 plt.tight_layout()
-plt.savefig('../data/diagnostics.png', dpi=200,
+plt.savefig('../data/diagnostics_crctd.png', dpi=200,
             bbox_inches='tight', facecolor='white')
 plt.close()
-print('Saved diagnostics.png')
+print('Saved diagnostics_crctd.png')

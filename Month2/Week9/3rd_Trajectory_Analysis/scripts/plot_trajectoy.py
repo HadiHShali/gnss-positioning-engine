@@ -10,7 +10,7 @@ import matplotlib.pyplot as plt
 import pandas as pd 
 
 # Load trajectory csv
-df = pd.read_csv('../data/trajectory.csv')
+df = pd.read_csv('../data/trajectory_crctd.csv')
 print(f'Loaded {len(df)} epochs')
 print(df.head())
 
@@ -19,16 +19,17 @@ df = df[df['converged']==1].reset_index(drop=True)
 print(f'After Filtering Non-Converged Fixes: {len(df)} epochs')
 
 #True Position for BILL00USA
-True_lat = 33.578381 #deg
-True_lon = -117.064265 #deg
-True_H = 472.0 #m ellipsoidal
+# BILL00USA truth, converted from IGS XYZ (-2420420.501, -4737131.551, 3507827.665), WGS84
+TRUE_LAT = 33.578243000    # deg
+TRUE_LON = -117.064599000  # deg
+TRUE_H   = 470.061         # m, ellipsoidal
 
 # Convert Lat/Lon to Local East North Errors
 R_Earth = 6378137.0 #m
-Lat_rad = np.radians(True_lat)
-df['east_err'] = np.radians(df['lon_deg'] - True_lon) * R_Earth * np.cos(Lat_rad)
-df['north_err'] = np.radians(df['lat_deg'] - True_lat) * R_Earth
-df['height_err'] = df['height_m'] - True_H
+Lat_rad = np.radians(TRUE_LAT)
+df['east_err'] = np.radians(df['lon_deg'] - TRUE_LON) * R_Earth * np.cos(Lat_rad)
+df['north_err'] = np.radians(df['lat_deg'] - TRUE_LAT) * R_Earth
+df['height_err'] = df['height_m'] - TRUE_H
 df['3d_err'] = np.sqrt(df['east_err']**2 + df['north_err']**2 + df['height_err']**2)    
 
 #Time axis in hours
@@ -107,7 +108,7 @@ ax.set_ylim(3, 13)
 fig.suptitle('BILL00USA — SPP Processor Output — Jan 7, 2024',
              fontsize=14, fontweight='bold', color='#1B3A6B', y=1.00)
 plt.tight_layout()
-plt.savefig('../data/trajectory_analysis.png', dpi=200,
+plt.savefig('../data/trajectory_analysis_crctd.png', dpi=200,
             bbox_inches='tight', facecolor='white')
 plt.close()
-print('Saved trajectory_analysis.png')
+print('Saved trajectory_analysis_crctd.png')

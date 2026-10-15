@@ -15,3 +15,10 @@ add_executable(spp_processor
     src/utils.cpp
     src/rinex_obs.cpp)
 
+# CORRECTED (2026-10-15): transmit-time version of the same app.
+add_executable(spp_processor_crctd
+    apps/spp_processor_crctd.cpp
+    src/gps_ls_solver.cpp
+    src/utils.cpp
+    src/satellites.cpp
+    src/rinex_obs.cpp)

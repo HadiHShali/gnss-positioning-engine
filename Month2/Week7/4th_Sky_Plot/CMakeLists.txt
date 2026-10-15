@@ -13,3 +13,10 @@ add_executable(position_dop_solver_skyplt
     src/rinex_obs.cpp
     src/gps_ls_solver.cpp
     src/utils.cpp)
+# CORRECTED (2026-10-15): transmit-time + TGD version of the same app.
+add_executable(rl_dta_pos_DOP_Skyplot_crctd
+    apps/rl_dta_pos_DOP_Skyplot_crctd.cpp
+    src/gps_ls_solver.cpp
+    src/utils.cpp
+    src/satellites.cpp
+    src/rinex_obs.cpp)
