@@ -2,13 +2,15 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
  
-raw = pd.read_csv('../data/trajectory.csv')
+raw = pd.read_csv('../data/trajectory_crctd.csv')
 raw = raw[raw['converged'] == 1].reset_index(drop=True)
-rts = pd.read_csv('../data/trajectory_rts.csv')
+rts = pd.read_csv('../data/trajectory_rts_crctd.csv')
  
-TRUE_LAT = 33.578381
-TRUE_LON = -117.064265
-TRUE_H   = 472.0
+
+TRUE_LAT = 33.578243000    # deg
+TRUE_LON = -117.064599000  # deg
+TRUE_H   = 470.061         # m, ellipsoidal
+
 R_EARTH  = 6378137.0
 lat_rad  = np.radians(TRUE_LAT)
  
@@ -86,5 +88,5 @@ ax.set_xlim(0,24)
 fig.suptitle('BILL00USA — Raw vs KF vs RTS-Smoothed (24 hours)',
              fontsize=14, fontweight='bold', color='#1B3A6B', y=1.00)
 plt.tight_layout()
-plt.savefig('../data/rts_comparison.png', dpi=200, bbox_inches='tight', facecolor='white')
-print('Saved rts_comparison.png')
+plt.savefig('../data/rts_comparison_crctd.png', dpi=200, bbox_inches='tight', facecolor='white')
+print('Saved rts_comparison_crctd.png')

@@ -21,7 +21,7 @@ int main() {
 	cout << "=== KF SPP PROCESSOR ===" << endl;
 
 	// Load raw SPP trajectory
-	string in_csv = "../../data/trajectory.csv";
+	string in_csv = "../../data/trajectory_crctd.csv";
 	auto epochs = readTrajectoryCsv(in_csv);
 	cout << "Loaded " << epochs.size() << " raw epochs" << endl;
 
@@ -178,7 +178,7 @@ int main() {
 	cout << "RTS smoothing complete." << endl;
  
 	// Write combined output CSV: raw, KF-filtered, AND RTS-smoothed
-	ofstream out2("../../data/trajectory_rts.csv");
+	ofstream out2("../../data/trajectory_rts_crctd.csv");
 	out2 << "t_gps,kf_lat,kf_lon,kf_h,rts_lat,rts_lon,rts_h,"
      		<< "kf_sigma,rts_sigma" << endl;
  
@@ -199,7 +199,7 @@ int main() {
          		<< sqrt(P_smooth_arr[i](0,0)) << endl;
 	}
 	out2.close();
-	cout << "Output: trajectory_rts.csv" << endl;
+	cout << "Output: trajectory_rts_crctd.csv" << endl;
 
 	return 0;
 

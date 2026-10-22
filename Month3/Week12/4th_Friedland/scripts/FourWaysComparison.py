@@ -1,7 +1,10 @@
 import pandas as pd, numpy as np
 
-df = pd.read_csv('../data/trajectory_rts_Bias.csv')  # adjust path as needed
-TRUE_LAT, TRUE_LON, TRUE_H = 33.578381, -117.064265, 472.0
+df = pd.read_csv('../data/trajectory_rts__crctd_Bias.csv')  # adjust path as needed
+TRUE_LAT = 33.578243000    # deg
+TRUE_LON = -117.064599000  # deg
+TRUE_H   = 470.061         # m, ellipsoidal
+
 R_EARTH = 6378137.0
 lat_rad = np.radians(TRUE_LAT)
 

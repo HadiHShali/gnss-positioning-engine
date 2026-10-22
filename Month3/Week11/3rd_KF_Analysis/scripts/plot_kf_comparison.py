@@ -6,19 +6,19 @@ import pandas as pd
 import matplotlib.pyplot as plt
  
 # Load raw SPP trajectory (Week 9)
-raw = pd.read_csv('../data/trajectory.csv')
+raw = pd.read_csv('../data/trajectory_crctd.csv')
 raw = raw[raw['converged'] == 1].reset_index(drop=True)
  
 # Load KF-filtered trajectory (Week 11)
-kf = pd.read_csv('../data/trajectory_kf.csv')
+kf = pd.read_csv('../data/trajectory_kf_crctd.csv')
  
 print(f'Raw epochs: {len(raw)}')
 print(f'KF epochs:  {len(kf)}')
  
 # BILL00USA truth (from RINEX obs header APPROX POSITION XYZ)
-TRUE_LAT = 33.578381
-TRUE_LON = -117.064265
-TRUE_H   = 472.0
+TRUE_LAT = 33.578243000    # deg
+TRUE_LON = -117.064599000  # deg
+TRUE_H   = 470.061         # m, ellipsoidal
 # Convert lat/lon differences to East/North meters
 R_EARTH = 6378137.0
 lat_rad = np.radians(TRUE_LAT)
@@ -103,9 +103,9 @@ ax.set_xlim(0, 24)
 fig.suptitle('BILL00USA — Raw SPP vs Kalman-Filtered (24 hours)',
              fontsize=14, fontweight='bold', color='#1B3A6B', y=1.00)
 plt.tight_layout()
-plt.savefig('../data/kf_comparison.png', dpi=200,
+plt.savefig('../data/kf_comparison_crctd.png', dpi=200,
             bbox_inches='tight', facecolor='white')
 plt.savefig('../data/kf_comparison.pdf', bbox_inches='tight')
 plt.close()
-print('Saved kf_comparison.png and .pdf')
+print('Saved kf_comparison_crctd.png and .pdf')
 

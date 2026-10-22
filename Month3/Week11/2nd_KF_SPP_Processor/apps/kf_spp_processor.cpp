@@ -21,7 +21,7 @@ int main() {
 	cout << "=== KF SPP PROCESSOR ===" << endl;
 
 	// Load raw SPP trajectory
-	string in_csv = "../../data/trajectory.csv";
+	string in_csv = "../../data/trajectory_crctd.csv";
 	auto epochs = readTrajectoryCsv(in_csv);
 	cout << "Loaded " << epochs.size() << " raw epochs" << endl;
 
@@ -62,7 +62,7 @@ int main() {
 
 	// ------ Open Output CSV file-----------------------//
 	//
-	ofstream out("../../data/trajectory_kf.csv");
+	ofstream out("../../data/trajectory_kf_crctd.csv");
 	out << "t_gps,raw_lat,raw_lon,raw_h,kf_lat,kf_lon,kf_h,"
 		<< "vx,vy,vz,sqrt_P00,sqrt_P11,sqrt_P22" << endl;
 
@@ -167,7 +167,7 @@ int main() {
 	cout << "Final velocity: (" << xf(3) << ", " << xf(4) << ", "
 		<< xf(5) << ") m/s" << endl;
 	cout << "Final position 1-sigma: " << sqrt(Pf(0, 0)) << " m" << endl;
-	cout << endl << "Output: trajectory_kf.csv" << endl;
+	cout << endl << "Output: trajectory_kf_crctd.csv" << endl;
 
 	return 0;
 

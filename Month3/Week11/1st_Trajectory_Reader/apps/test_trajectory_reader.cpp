@@ -9,7 +9,7 @@ int main()
 {
 	cout << "=== TRAJECTORY READER TEST ===" << endl;
 
-	string csv_file = "../../data/trajectory.csv";
+	string csv_file = "../../data/trajectory_crctd.csv";
 	auto epochs = readTrajectoryCsv(csv_file);
 
 	cout << "Loaded " << epochs.size() << " epochs" << endl;

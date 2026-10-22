@@ -21,7 +21,7 @@ int main() {
 	cout << "=== KF SPP PROCESSOR ===" << endl;
 
 	// Load raw SPP trajectory
-	string in_csv = "../../data/trajectory.csv";
+	string in_csv = "../../data/trajectory_crctd.csv";
 	auto epochs = readTrajectoryCsv(in_csv);
 	cout << "Loaded " << epochs.size() << " raw epochs" << endl;
 
@@ -187,7 +187,7 @@ int main() {
 	// Variant B: fc_lat/lon/h              -- forward KF + PER-EPOCH Friedland (rigorous)
 	// Variant C: rts_lat/lon/h             -- RTS-smoothed alone (Week 12 Day 3)
 	// Variant D: corrected_lat/lon/h       -- RTS-smoothed + CONVERGED-CONSTANT Friedland (approx)
-	ofstream out2("../../data/trajectory_rts_Bias.csv");
+	ofstream out2("../../data/trajectory_rts__crctd_Bias.csv");
 	out2 << "t_gps,"
 		<< "kf_lat,kf_lon,kf_h,"
 		<< "fc_lat,fc_lon,fc_h,"
@@ -229,7 +229,7 @@ int main() {
 			<< corrected_lat << "," << corrected_lon << "," << corrected_h << endl;
 	}
 	out2.close();
-	cout << "Output: trajectory_rts_Bias.csv (4-way comparison: A=kf, B=fc, C=rts, D=corrected)" << endl;
+	cout << "Output: trajectory_rts_crctd_Bias.csv (4-way comparison: A=kf, B=fc, C=rts, D=corrected)" << endl;
 
 	// Print final bias estimate for a quick sanity check
 	Vector3d bfinal = biasEst.getBias();
