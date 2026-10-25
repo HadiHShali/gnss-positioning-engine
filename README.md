@@ -65,7 +65,7 @@
 
 Dual-frequency removes the 2.2 m height bias that Klobuchar leaves. Most of the remaining offset is station motion: the IGS coordinate refers to an earlier epoch, and BILL's daily solution for this date (Nevada Geodetic Laboratory, IGS20) lies 0.73 m WNW of it.
 
-![Single vs Dual Frequency KF/RTS](Month3/Month3/Week13/4th_Visualization_WrapUp/scripts/kf_rts_freq_comparison_crctd.png)
+![Single vs Dual Frequency KF/RTS](Month3/Week13/4th_Visualization_WrapUp/scripts/kf_rts_freq_comparison_crctd.png)
 ![Month 3 Final: Dual-Freq + SP3/CLK + KF/RTS](Month3/Week14/4th_SP3_KF_RTS/scripts/final_sp3clk_comparison_crctd.png)
 
 ---
