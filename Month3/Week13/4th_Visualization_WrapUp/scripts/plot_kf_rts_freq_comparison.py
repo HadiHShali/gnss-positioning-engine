@@ -24,10 +24,13 @@ import matplotlib.pyplot as plt
 # ─────────────────────────────────────────────────────────────
 # CONFIG — point these at your real files
 # ─────────────────────────────────────────────────────────────
-SINGLE_FREQ_CSV = "../../../Week12/2nd_RTS_Implementation/data/trajectory_rts.csv"
-DUAL_FREQ_CSV   = "../data/trajectory_rts.csv"
+SINGLE_FREQ_CSV = "../../../Week12/2nd_RTS_Implementation/data/trajectory_rts_crctd.csv"
+DUAL_FREQ_CSV   = "../data/trajectory_rts_crctd.csv"
 
-TRUE_LAT, TRUE_LON, TRUE_H = 33.578381, -117.064265, 472.0
+#TRUE_LAT, TRUE_LON, TRUE_H = 33.578381, -117.064265, 472.0
+TRUE_LAT = 33.578243000    # deg
+TRUE_LON = -117.064599000  # deg
+TRUE_H   = 470.061         # m, ellipsoidal
 R_EARTH = 6378137.0
 LAT_RAD = np.radians(TRUE_LAT)
 
@@ -112,5 +115,5 @@ ax.legend(fontsize=9.5); ax.grid(alpha=0.3, which='both'); ax.set_xlim(0, 24)
 fig.suptitle('BILL00USA — KF vs RTS: Single-Frequency vs Dual-Frequency (24 hours)',
              fontsize=15, fontweight='bold', color='#1B3A6B', y=1.01)
 plt.tight_layout()
-plt.savefig('kf_rts_freq_comparison.png', dpi=200, bbox_inches='tight', facecolor='white')
-print("Saved kf_rts_freq_comparison.png")
+plt.savefig('kf_rts_freq_comparison_crctd.png', dpi=200, bbox_inches='tight', facecolor='white')
+print("Saved kf_rts_freq_comparison_crctd.png")

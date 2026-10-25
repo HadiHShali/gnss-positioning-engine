@@ -17,3 +17,14 @@ add_library(clk_lib        STATIC src/clk_reader.cpp)
 add_executable(spp_processor_precise apps/spp_processor_precise.cpp)
 target_link_libraries(spp_processor_precise PRIVATE
     satellites_lib solver_lib utils_lib rinex_obs_lib sp3_lib clk_lib)
+
+# CORRECTED (2026-10-24): transmit-time version of the same app.
+#   - apps/spp_processor_precise_crctd.cpp  (includes include/interpolation_crctd.h, header-only)
+#   - clk_lib_crctd replaces clk_lib: the original reader also read the ASCG/ASPA header
+#     lines as clock records. Never link clk_lib and clk_lib_crctd to the same target:
+#     both define parseClk().
+add_library(clk_lib_crctd STATIC src/clk_reader_crctd.cpp)
+
+add_executable(spp_processor_precise_crctd apps/spp_processor_precise_crctd.cpp)
+target_link_libraries(spp_processor_precise_crctd PRIVATE
+    satellites_lib solver_lib utils_lib rinex_obs_lib sp3_lib clk_lib_crctd)

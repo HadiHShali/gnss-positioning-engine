@@ -25,7 +25,8 @@
 - Processes multi-epoch RINEX files (24-hour trajectories)
 
 **Kalman filtering & smoothing (Month 3, Weeks 10-12):**
-- 8-state Kalman filter (position, velocity, clock bias, clock drift)
+- 8-state Kalman filter (position, velocity, clock bias, clock drift), run in
+  static-station mode for BILL00USA (no process noise, velocity fixed at zero)
 - Rauch-Tung-Striebel (RTS) fixed-interval smoother, forward+backward pass
 - Friedland separate-bias estimator implemented and tested — formally diagnosed as
   **structurally unobservable** for single-station position bias (confirmed against
@@ -35,6 +36,7 @@
 - Dual-frequency ionosphere-free pseudorange combination (L1/L2, IS-GPS-200 standard)
 - Precise orbit interpolation from IGS Final SP3 products (10th-order Lagrange)
 - Precise clock interpolation from IGS Final CLK products (linear, per Kouba's guide)
+- Broadcast orbit and clock used together wherever SP3/CLK has no data (no extrapolation)
 
 **Carrier phase & differential positioning (Month 4, in progress):**
 - Carrier phase observable parsing (L1C/L2W + LLI flags) from RINEX
@@ -53,6 +55,19 @@
 ![Trajectory Analysis](Month2/Week9/3rd_Trajectory_Analysis/data/trajectory_analysis_crctd.png)
 ![Engineering Diagnostics](Month2/Week9/3rd_Trajectory_Analysis/data/diagnostics_crctd.png)
 
+**Month 3 after the correction pass** (same station and day, 24 h, static KF + RTS, scored against BILL's IGS XYZ):
+
+| Pipeline | Raw SPP mean 3D | KF + RTS 3D |
+|---|---|---|
+| Single-frequency + Klobuchar (Week 12) | 3.03 m | 2.50 m |
+| Dual-frequency, broadcast products (Week 13) | 1.64 m | 0.80 m |
+| Dual-frequency + IGS SP3/CLK (Week 14) | 1.68 m | **0.72 m** |
+
+Dual-frequency removes the 2.2 m height bias that Klobuchar leaves. Most of the remaining offset is station motion: the IGS coordinate refers to an earlier epoch, and BILL's daily solution for this date (Nevada Geodetic Laboratory, IGS20) lies 0.73 m WNW of it.
+
+![Single vs Dual Frequency KF/RTS](Month3/Week13/3rd_DualFreq_KF_RTS/data/kf_rts_freq_comparison_crctd.png)
+![Month 3 Final: Dual-Freq + SP3/CLK + KF/RTS](Month3/Week14/4th_SP3_KF_RTS/data/final_sp3clk_comparison_crctd.png)
+
 ---
 
 ## Repo Structure
@@ -65,7 +80,7 @@ Month2/  GPS Positioning (COMPLETE, transmit-time corrected)
   Week7/  DOP analysis + sky plot visualization
   Week8/  Atmospheric corrections (Klobuchar + Saastamoinen)
   Week9/  Multi-epoch SPP processor + analysis
-Month3/  Kalman Filtering, RTS, Dual-Frequency, Precise Products (COMPLETE)
+Month3/  Kalman Filtering, RTS, Dual-Frequency, Precise Products (COMPLETE, transmit-time corrected)
   Week10/  8-state KF class + synthetic validation
   Week11/  KF on real BILL00USA data
   Week12/  RTS smoother + Friedland/observability analysis
@@ -120,9 +135,9 @@ cmake -B build
 # Build (Release for speed)
 cmake --build build --config Release
 
-# Run
+# Run (the _crctd executable is the corrected version)
 cd build/Release
-./kf_spp_processor.exe
+./kf_spp_processor_crctd.exe
 ```
 
 **Requirements:** CMake >= 3.15, C++17 compiler (MSVC/GCC/Clang), Eigen 3.4.
@@ -163,22 +178,12 @@ real bugs during development — including a unit-mismatch error in the geometry
 combination and a gap-handling logic error in cycle-slip detection — both found by
 computing expected values by hand and comparing against actual program output.
 It also caught a timing error: satellite position, clock and Earth-rotation terms
-were evaluated at signal reception instead of transmit time (~23 m of position error).
-Corrected copies (`_crctd` suffix) sit next to the originals so the diff shows exactly
-what changed. Month 2 is fixed, and later months are in progress.
-
----
-
-## About Me
-
-I'm **Hadi Heydarizadeh Shali**, a PhD candidate in Earth Sciences (Geodesy concentration) at the University of Memphis, expected graduation **December 2026**. My research focuses on GNSS time-series analysis, station velocity estimation, and ground deformation monitoring.
-
-This portfolio bridges my academic background in geodesy with the C++ software engineering skills needed for industry navigation and autonomy roles.
-
-**Contact:**
-- Email: hadi.heydarizadeh@gmail.com
-- LinkedIn: [linkedin.com/in/hadihshali](https://www.linkedin.com/in/hadihshali/)
-- GitHub: [github.com/HadiHShali](https://github.com/HadiHShali)
+were evaluated at signal reception instead of transmit time (48 m mean error in the
+Month 3 dual-frequency pipeline, 1.6 m after the fix). The same review fixed an
+uninitialized loop counter that silently zeroed the KF process noise, SP3 orbit
+extrapolation past the end of the file, and a CLK reader that parsed header lines as
+clock records. Corrected copies (`_crctd` suffix) sit next to the originals so the diff
+shows exactly what changed. Months 2 and 3 are fixed.
 
 ---
 
@@ -202,7 +207,7 @@ Implementations follow official specifications and authoritative sources:
 
 ## Updated Monthly
 
-This README is updated at the end of each month with new accomplishments, screenshots, and milestones. **Last update: Month 2 transmit-time correction pass (October 2026).**
+This README is updated at the end of each month with new accomplishments, screenshots, and milestones. **Last update: Month 3 correction pass (October 2026).**
 
 ---
 

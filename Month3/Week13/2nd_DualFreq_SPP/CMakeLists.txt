@@ -18,3 +18,11 @@ add_library(rinex_obs_lib  STATIC src/rinex_obs.cpp)
 add_executable(spp_processor_dualFreq apps/spp_processor_dualFreq.cpp)
 target_link_libraries(spp_processor_dualFreq PRIVATE
     satellites_lib solver_lib utils_lib rinex_obs_lib)
+
+# CORRECTED (2026-10-24): transmit-time version of the same app.
+add_executable(spp_processor_dualFreq_crctd
+    apps/spp_processor_dualFreq_crctd.cpp
+    src/gps_ls_solver.cpp
+    src/utils.cpp
+    src/satellites.cpp
+    src/rinex_obs.cpp)

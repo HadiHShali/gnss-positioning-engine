@@ -15,3 +15,9 @@ add_library(utils_lib   STATIC src/utils.cpp)
 add_executable(DualFreqSpp_KF_RTS apps/DualFreqSpp_KF_RTS.cpp)
 target_link_libraries(DualFreqSpp_KF_RTS PRIVATE
     kf_gps traj_reader utils_lib)
+
+
+# CORRECTED (2026-10-24)
+add_library(kf_gps_crctd STATIC src/kalman_filter_gps_crctd.cpp)
+add_executable(DualFreqSpp_KF_RTS_crctd apps/DualFreqSpp_KF_RTS_crctd.cpp)
+target_link_libraries(DualFreqSpp_KF_RTS_crctd PRIVATE kf_gps_crctd traj_reader utils_lib)

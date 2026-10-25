@@ -14,3 +14,7 @@ add_library(clk_lib STATIC src/clk_reader.cpp)
 # Executable: standalone test program
 add_executable(test_sp3_clk apps/test_sp3_clk.cpp)
 target_link_libraries(test_sp3_clk PRIVATE sp3_lib clk_lib)
+
+# CORRECTED (2026-10-24): same test app, corrected CLK reader
+add_executable(test_sp3_clk_crctd apps/test_sp3_clk.cpp
+    src/sp3_reader.cpp src/clk_reader_crctd.cpp)
